@@ -3,7 +3,7 @@
 BEGIN {
     ptr = 0
     input = ""
-    for (i = 0; i <= 30000; ++i)
+    for (i = 0; i < 30000; ++i)
         tape[i] = 0
     for (i = 0; i < 256; ++i)
         ord[sprintf("%c", i)] = i
