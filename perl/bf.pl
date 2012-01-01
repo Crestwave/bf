@@ -19,7 +19,7 @@ my %translation = (
 local $| = 1;
 my $program;
 {
-    local $/;
+    local $/ = undef;
     $program = <>;
     die $! unless defined($program);
 }
