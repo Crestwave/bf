@@ -23,7 +23,9 @@ my $program;
     $program = <>;
     die $! unless defined($program);
 }
+
 $program =~ s/[^><+-.,[\]]//g;
 $program =~ s/./$translation{$&};/g;
+
 eval $program;
 die $@ if $@;
