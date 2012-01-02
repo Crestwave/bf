@@ -11,7 +11,7 @@ my %translation = (
     '+' => '$a[$p] = $a[$p] + 1 % 256',
     '-' => '$a[$p] = $a[$p] - 1 % 256',
     '.' => 'print chr($a[$p])',
-    ',' => '$c = getc; $a[$p] = ord($c) if defined($c)',
+    ',' => '$a[$p] = ord($c) if defined($c = getc)',
     '[' => 'while ($a[$p]) {',
     ']' => '}',
 );
