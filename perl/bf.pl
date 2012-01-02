@@ -17,10 +17,13 @@ my %translation = (
 );
 
 local $| = 1;
-local $/;
-local $_ = <>;
-die $! unless defined;
-s/[^><+-.,[\]]//g;
-s/./$translation{$&};/g;
-eval;
+my $program;
+{
+    local $/;
+    $program = <>;
+    die $! unless defined($program);
+}
+$program =~ s/[^><+-.,[\]]//g;
+$program =~ s/./$translation{$&};/g;
+eval $program;
 die $@ if $@;
