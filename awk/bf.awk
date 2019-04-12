@@ -1,7 +1,7 @@
 #!/usr/bin/awk -f
 
 BEGIN {
-    ptr = counter = 0
+    ptr = 0
     input = ""
     for (i = 0; i <= 30000; ++i)
         tape[i] = 0
@@ -19,12 +19,11 @@ END {
     for (i = 1; i <= len; ++i) {
         c = substr(program, i, 1)
         if (c == "[") {
-            stack[counter++] = i
+            stack[++ptr] = i
         } else if (c == "]") {
-            j = stack[--counter]
-            delete stack[counter]
-            jumps[j] = i
-            jumps[i] = j
+            jumps[stack[ptr]] = i
+            jumps[i] = stack[ptr]
+            delete stack[ptr--]
         }
     }
 
