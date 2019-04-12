@@ -18,7 +18,18 @@ END {
     len = length(program)
     for (i = 1; i <= len; ++i) {
         c = substr(program, i, 1)
+        if (c == "[") {
+            stack[counter++] = i
+        } else if (c == "]") {
+            j = stack[--counter]
+            delete stack[counter]
+            jumps[j] = i
+            jumps[i] = j
+        }
+    }
 
+    for (i = 1; i <= len; ++i) {
+        c = substr(program, i, 1)
         if (c == ">") {
             ++ptr
         } else if (c == "<") {
@@ -34,27 +45,14 @@ END {
         } else if (c == ",") {
             if (length(input) == 0 && getline input < "-")
                 input = input "\n"
-
             if (length(input)) {
                 tape[ptr] = ord[substr(input, 1, 1)]
                 sub(/./, "", input)
             }
         } else if (c == "[") {
-            if (tape[ptr]) {
-                stack[counter++] = i
-            } else {
-                for (depth = 1; depth > 0 && ++i; ) {
-                    c = substr(program, i, 1)
-                    if (c == "[") {
-                        ++depth
-                    } else if (c == "]") {
-                        --depth
-                    }
-                }
-            }
+            if (tape[ptr] == 0) i = jumps[i]
         } else if (c == "]") {
-            if (tape[ptr]) i = stack[counter - 1] - 1
-            delete stack[--counter]
+            if (tape[ptr]) i = jumps[i]
         }
     }
 }
