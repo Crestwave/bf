@@ -1,6 +1,6 @@
 # bf
 
-A collection of brainfuck interpreters written in pure AWK, Elvish and Bash.
+A collection of brainfuck interpreters written in pure AWK, Bash, and Elvish
 
 ## Implementation Info
 
