@@ -2,7 +2,7 @@
 
 A brainfuck interpreter written in pure AWK
 
-## Compatibility
+## Info
 
 - It is compatible with the one true `awk`
 - It is compliant with `gawk`'s linting when portable
