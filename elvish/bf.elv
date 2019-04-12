@@ -13,8 +13,29 @@ program = (re:replace '[^><+--.,[\]]' "" $program)
 len = (count $program)
 i ptr = 0 0
 tape = [(repeat 30000 0)]
+jumps = $tape
 stack = []
 
+while (< $i $len) {
+  c = $program[$i]
+  i = (+ $i 1)
+  if (eq $c "[") {
+    stack = [$@stack $i]
+  } elif (eq $c "]") {
+    if (eq (count $stack) 0) {
+      fail "unmatched ']'"
+    }
+    j = $stack[-1]
+    stack = $stack[:-1]
+    jumps[$j] = $i
+    jumps[$i] = $j
+  }
+}
+if (> (count $stack) 0) {
+  fail "unmatched '['"
+}
+
+i = 0
 while (< $i $len) {
   c = $program[$i]
   i = (+ $i 1)
@@ -44,32 +65,17 @@ while (< $i $len) {
         }' | slurp
       )
     }
-
     if (> (count $input) 0) {
       tape[$ptr] = (ord $input[0])
       input = $input[1:]
     }
   } elif (eq $c "[") {
-    if (!= $tape[$ptr] 0) {
-      stack = [$@stack $i]
-    } else {
-      depth = 1
-      while (> $depth 0) {
-        c = $program[$i]
-        i = (+ $i 1)
-        if (eq $c "[") {
-          depth = (+ $depth 1)
-        } elif (eq $c "]") {
-          depth = (- $depth 1)
-        }
-
-      }
+    if (== $tape[$ptr] 0) {
+      i = $jumps[$i]
     }
   } elif (eq $c "]") {
-    if (!= 0 $tape[$ptr]) {
-      i = $stack[-1]
-    } else {
-      stack = $stack[:-1]
+    if (!= $tape[$ptr] 0) {
+      i = $jumps[$i]
     }
   }
 }
