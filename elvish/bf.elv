@@ -22,7 +22,7 @@ while (< $i $len) {
   if (eq $c "[") {
     stack = [$@stack $i]
   } elif (eq $c "]") {
-    if (eq (count $stack) 0) {
+    if (== (count $stack) 0) {
       fail "unmatched ']'"
     }
     j = $stack[-1]
