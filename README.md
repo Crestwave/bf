@@ -1,6 +1,6 @@
 # bf
 
-A collection of brainfuck interpreters written in pure AWK, Bash, and Elvish
+Brainfuck interpreters written in pure AWK, POSIX sh + printf, Elvish, and more
 
 ## Implementation Info
 
@@ -10,4 +10,4 @@ All the interpreters have the following behavior:
 - The cell is left unchanged on EOF
 - Input is line buffered
 
-Any other behavior varies to suit the languages.
+Any other behavior may vary to suit the languages.
