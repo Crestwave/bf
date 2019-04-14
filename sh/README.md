@@ -1,6 +1,6 @@
 # bf.sh
 
-A brainfuck interpreter written in pure POSIX sh + printf
+A brainfuck interpreter written in pure sh
 
 ## Info
 
