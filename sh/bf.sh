@@ -1,6 +1,9 @@
 #!/bin/sh
 
-unset IFS
+IFS=' '
+n='
+'
+val=0
 
 if [ "$#" -gt 0 ]; then
 	while read -r line; do
@@ -11,10 +14,6 @@ else
 		prog=$prog$line
 	done
 fi
-
-n='
-'
-val=0
 
 while :; do
 	case $prog in
