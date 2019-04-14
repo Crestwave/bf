@@ -1,16 +1,17 @@
 #!/bin/sh
 
+unset IFS
+
 if [ "$#" -gt 0 ]; then
-	while IFS= read -r line; do
+	while read -r line; do
 		prog=$prog$line
 	done < "$1"
 else
-	while IFS= read -r line; do
+	while read -r line; do
 		prog=$prog$line
 	done
 fi
 
-IFS=' '
 n='
 '
 val=0
@@ -43,7 +44,7 @@ while :; do
 			printf "\\$(printf %o "$val")"
 			;;
 		','*)
-			[ -z "$input" ] && IFS= read -r input && input=$input$n
+			[ -z "$input" ] && read -r input && input=$input$n
 
 			if [ -n "$input" ]; then
 				val=$(
