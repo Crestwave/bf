@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if [ -e "$1" ]; then
+if [ "$#" -gt 0 ]; then
 	while IFS= read -r line; do
 		prog=$prog$line
 	done < "$1"
