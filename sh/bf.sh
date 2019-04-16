@@ -84,7 +84,11 @@ while :; do
 		'')
 			break
 			;;
+		*)
+			prog=${prog#?}
+			continue
+			;;
 	esac
-	bak=${prog%"${prog#[]><+-.,[]}"}$bak
+	bak=${prog%"${prog#?}"}$bak
 	prog=${prog#?}
 done
