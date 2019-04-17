@@ -10,6 +10,7 @@ if [ "$#" -gt 0 ]; then
 	while read -r line; do
 		prog=$prog$line
 	done < "$1"
+	[ "$?" -eq 2 ] && exit 2
 else
 	while read -r line; do
 		prog=$prog$line
