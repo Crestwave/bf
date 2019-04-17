@@ -1,5 +1,6 @@
 #!/bin/sh
 
+LC_ALL=C
 IFS=' '
 n='
 '
@@ -46,10 +47,7 @@ while :; do
 			[ -z "$input" ] && read -r input && input=$input$n
 
 			if [ -n "$input" ]; then
-				val=$(
-					LC_CTYPE=C
-					printf %d "'${input%"${input#?}"}"
-				)
+				val=$(printf %d "'${input%"${input#?}"}")
 				input=${input#?}
 			fi
 			;;
