@@ -5,7 +5,7 @@ A brainfuck interpreter written in pure Perl 5
 ## Info
 
 - It is compliant with the `strict` and `warnings` pragmas
-- The program is transpiled into Perl 5 and evaluated
+- The program is transpiled into Perl 5 then evaluated
 - An array of 30,000 cells is initialized
 	- Cells are initialized when modified
 	- Printing uninitialized cells is not allowed
