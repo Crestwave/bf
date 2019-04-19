@@ -16,8 +16,9 @@ my %translation = (
     ']' => '}',
 );
 
+local $| = 1;
 local $/;
-our $_ = <>;
+local $_ = <>;
 die $! unless defined;
 s/[^><+-.,[\]]//g;
 s/./$translation{$&};/g;
