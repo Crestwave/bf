@@ -11,7 +11,7 @@ my %translation = (
     '+' => '++$a[$p]; $a[$p] = 0 if ($a[$p] > 255)',
     '-' => '--$a[$p]; $a[$p] = 255 if ($a[$p] < 0)',
     '.' => 'print chr($a[$p])',
-    ',' => '$c = getc and $a[$p] = ord($c)',
+    ',' => '$c = getc; $a[$p] = ord($c) if defined($c)',
     '[' => 'while ($a[$p]) {',
     ']' => '}',
 );
