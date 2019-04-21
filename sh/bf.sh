@@ -34,11 +34,11 @@ while :; do
 			;;
 		'+'*)
 			val=$(( val + 1 ))
-			[ "$val" -gt 255 ] && val=0
+			[ "$val" -eq 256 ] && val=0
 			;;
 		'-'*)
 			val=$(( val - 1 ))
-			[ "$val" -lt 0 ] && val=255
+			[ "$val" -eq -1 ] && val=255
 			;;
 		'.'*)
 			printf "\\$(printf %o "$val")"

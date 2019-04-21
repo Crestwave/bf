@@ -30,11 +30,11 @@ for (( i = ptr = 0; i < ${#program}; ++i )); do
 			;;
 		'+')
 			(( ++tape['$ptr'] ))
-			(( tape['$ptr'] > 255 )) && tape[$ptr]=0
+			(( tape['$ptr'] == 256 )) && tape[$ptr]=0
 			;;
 		'-')
 			(( --tape['$ptr'] ))
-			(( tape['$ptr'] < 0 )) && tape[$ptr]=255
+			(( tape['$ptr'] == -1 )) && tape[$ptr]=255
 			;;
 		'.')
 			printf -v f %x "${tape[$ptr]}"

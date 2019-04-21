@@ -35,10 +35,10 @@ END {
             --ptr
         } else if (c == "+") {
             ++tape[ptr]
-            if (tape[ptr] > 255) tape[ptr] = 0
+            if (tape[ptr] == 256) tape[ptr] = 0
         } else if (c == "-") {
             --tape[ptr]
-            if (tape[ptr] < 0) tape[ptr] = 255
+            if (tape[ptr] == -1) tape[ptr] = 255
         } else if (c == ".") {
             printf("%c", tape[ptr])
         } else if (c == ",") {

@@ -46,12 +46,12 @@ while (< $i $len) {
     ptr = (- $ptr 1)
   } elif (eq $c "+") {
     tape[$ptr] = (+ $tape[$ptr] 1)
-    if (> $tape[$ptr] 255) {
+    if (== $tape[$ptr] 256) {
       tape[$ptr] = 0
     }
   } elif (eq $c "-") {
     tape[$ptr] = (- $tape[$ptr] 1)
-    if (< $tape[$ptr] 0) {
+    if (== $tape[$ptr] -1) {
       tape[$ptr] = 255
     }
   } elif (eq $c ".") {
