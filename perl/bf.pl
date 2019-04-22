@@ -26,6 +26,5 @@ my $program;
 
 $program =~ s/[^><+-.,[\]]//g;
 $program =~ s/./$translation{$&};/g;
-
 eval $program;
 die $@ if $@;
