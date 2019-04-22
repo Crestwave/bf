@@ -61,7 +61,7 @@ while :; do
 						'['*) depth=$(( depth + 1 )) ;;
 						']'*) depth=$(( depth - 1 )) ;;
 					esac
-					[ "$depth" -le 0 ] && break
+					[ "$depth" -eq 0 ] && break
 				done
 			fi
 			;;
@@ -75,7 +75,7 @@ while :; do
 					esac
 					prog=${bak%"${bak#?}"}$prog
 					bak=${bak#?}
-					[ "$depth" -le 0 ] && break
+					[ "$depth" -eq 0 ] && break
 				done
 			fi
 			;;
