@@ -3,7 +3,6 @@ use strict;
 use warnings;
 
 local $| = 1;
-
 my @a = (0) x 30000;
 my $p = 0;
 my $c;
