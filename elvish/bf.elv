@@ -1,5 +1,4 @@
 #!/usr/bin/env elvish
-
 use re
 
 program input = "" ""
