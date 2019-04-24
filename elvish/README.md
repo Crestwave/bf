@@ -4,7 +4,7 @@ A brainfuck interpreter written in pure Elvish
 
 ## Info
 
-- It reads from a file named in the first argument
+- It reads the program from a file named in the first argument
 	- If there are no arguments, it reads from standard input
 - An list of 30,000 cells is initialized.
 	- Negative pointers count from the back of the list.
