@@ -1,4 +1,4 @@
-# bf.elv
+# bf.py
 
 A brainfuck interpreter written in pure Python
 
@@ -12,7 +12,3 @@ A brainfuck interpreter written in pure Python
 	- Negative pointers count from the back of the list.
 - Unmatched brackets are detected before runtime
 - The Python version's default character encoding is used for output
-	- On Python 2, it is ASCII-encoded
-		- Non-ASCII bytes are output raw
-	- On Python 3, it is encoded depending on your locale
-		- On ASCII locales, non-ASCII bytes result in an error
