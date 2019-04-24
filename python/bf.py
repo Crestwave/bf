@@ -63,7 +63,7 @@ def execute_bf(program):
 
 
 def main():
-    """Reads the program, strips comments from it, then runs execute_bf()"""
+    """Reads the program, strips comments from it, then runs execute_bf"""
     if len(sys.argv) > 1:
         with open(sys.argv[1], 'r') as program_file:
             program = program_file.read()
