@@ -29,10 +29,10 @@ for (( i = ptr = 0; i < ${#program}; ++i )); do
 			(( --ptr ))
 			;;
 		'+')
-			(( tape['$ptr'] = (tape['$ptr'] + 1) & 255 ))
+			(( tape['$ptr'] = tape['$ptr']+1 & 255 ))
 			;;
 		'-')
-			(( tape['$ptr'] = (tape['$ptr'] - 1) & 255 ))
+			(( tape['$ptr'] = tape['$ptr']-1 & 255 ))
 			;;
 		'.')
 			printf -v f %x "${tape[$ptr]}"
