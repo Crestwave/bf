@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""A brainfuck interpreter in pure Python"""
+"""A brainfuck interpreter written in pure Python"""
 import re
 import sys
 
