@@ -13,6 +13,7 @@ def parse_jumps(program):
     while index < len(program):
         char = program[index]
         index += 1
+
         if char == '[':
             stack.append(index)
         elif char == ']':
