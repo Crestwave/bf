@@ -17,13 +17,13 @@ def parse_jumps(program):
             stack.append(index)
         elif char == ']':
             if not stack:
-                raise SyntaxError("unmatched closing bracket")
+                raise SyntaxError('unmatched closing bracket')
             match = stack.pop()
             jumps[match] = index
             jumps[index] = match
 
     if stack:
-        raise SyntaxError("unmatched opening bracket")
+        raise SyntaxError('unmatched opening bracket')
 
     return jumps
 
@@ -74,5 +74,5 @@ def main():
     execute_bf(program)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
