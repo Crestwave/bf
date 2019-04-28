@@ -2,6 +2,7 @@
 #include <stdint.h>
 
 #define MAX_CODE_SIZE 65536
+
 unsigned char program[MAX_CODE_SIZE];
 uint8_t tape[30000] = {0};
 int jumps[MAX_CODE_SIZE];
