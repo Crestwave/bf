@@ -3,12 +3,12 @@
 
 #define MAX_CODE_SIZE 65536
 
-unsigned char program[MAX_CODE_SIZE];
-uint8_t tape[30000] = {0};
+char program[MAX_CODE_SIZE];
+uint8_t tape[65536] = {0};
+uint16_t ptr;
 int jumps[MAX_CODE_SIZE];
 int stack[MAX_CODE_SIZE];
 int len;
-int ptr;
 int c;
 int i;
 FILE *f;
