@@ -16,7 +16,7 @@ BEGIN {
 
 END {
     len = length(program)
-    for (i = 1; i <= len; ++i) {
+    for (i = 1; i <= len && ++i;) {
         c = substr(program, i, 1)
         if (c == "[") {
             stack[++ptr] = i
