@@ -1,8 +1,9 @@
 #include <stdio.h>
+#include <stdint.h>
 
 #define MAX_CODE_SIZE 65536
 unsigned char program[MAX_CODE_SIZE];
-unsigned char tape[30000] = {0};
+uint8_t tape[30000] = {0};
 int jumps[MAX_CODE_SIZE];
 int stack[MAX_CODE_SIZE];
 int len;
@@ -39,10 +40,10 @@ int main(int argc, char **argv) {
 			--ptr;
 			break;
 		case '+':
-			tape[ptr] = (tape[ptr]+1) & 255;
+			++tape[ptr];
 			break;
 		case '-':
-			tape[ptr] = (tape[ptr]-1) & 255;
+			--tape[ptr];
 			break;
 		case '.':
 			putchar(tape[ptr]);
