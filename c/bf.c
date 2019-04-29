@@ -11,17 +11,17 @@ int stack[MAX_CODE_SIZE];
 int len;
 int c;
 int i;
-FILE *f;
 
 int main(int argc, char **argv)
 {
-	if (argc < 2)
-		f = stdin;
-	else
-		f = fopen(argv[1], "r");
-
-	len = fread(program, 1, MAX_CODE_SIZE, f);
-	fclose(f);
+	if (argc < 2) {
+		len = fread(program, 1, MAX_CODE_SIZE, stdin);
+		clearerr(stdin);
+	} else {
+		FILE *f = fopen(argv[1], "r");
+		len = fread(program, 1, MAX_CODE_SIZE, f);
+		fclose(f);
+	}
 
 	for (i = 0; i < len && ++i;)
 		switch (program[i]) {
@@ -56,6 +56,8 @@ int main(int argc, char **argv)
 			c = getchar();
 			if (c != EOF)
 				tape[ptr] = c;
+			else
+				clearerr(stdin);
 			break;
 		case '[':
 			if (tape[ptr] == 0)
