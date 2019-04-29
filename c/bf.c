@@ -13,7 +13,8 @@ int c;
 int i;
 FILE *f;
 
-int main(int argc, char **argv) {
+int main(int argc, char **argv)
+{
 	if (argc < 2)
 		f = stdin;
 	else
