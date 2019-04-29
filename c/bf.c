@@ -4,7 +4,7 @@
 #define MAX_CODE_SIZE 65536
 
 char program[MAX_CODE_SIZE];
-uint8_t tape[65536] = {0};
+uint8_t tape[65536];
 uint16_t ptr;
 int jumps[MAX_CODE_SIZE];
 int stack[MAX_CODE_SIZE];
