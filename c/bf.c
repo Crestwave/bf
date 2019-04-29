@@ -21,6 +21,7 @@ int main(int argc, char **argv)
 		f = fopen(argv[1], "r");
 
 	len = fread(program, 1, MAX_CODE_SIZE, f);
+	fclose(f);
 
 	for (i = 0; i < len && ++i;)
 		switch (program[i]) {
