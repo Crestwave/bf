@@ -55,7 +55,7 @@ while :; do
 			if [ "$val" -eq 0 ]; then
 				depth=1
 				while :; do
-					bak=${prog%"${prog#[]><+-.,[]}"}$bak
+					bak=${prog%"${prog#['><+-.,[]']}"}$bak
 					prog=${prog#?}
 					case $prog in
 						'['*) depth=$(( depth + 1 )) ;;
