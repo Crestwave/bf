@@ -54,28 +54,26 @@ while :; do
 		'['*)
 			if [ "$val" -eq 0 ]; then
 				depth=1
-				while :; do
+				while [ "$depth" -gt 0 ]; do
 					bak=${prog%"${prog#['><+-.,[]']}"}$bak
 					prog=${prog#?}
 					case $prog in
 						'['*) depth=$(( depth + 1 )) ;;
 						']'*) depth=$(( depth - 1 )) ;;
 					esac
-					[ "$depth" -eq 0 ] && break
 				done
 			fi
 			;;
 		']'*)
 			if [ "$val" -ne 0 ]; then
 				depth=1
-				while :; do
+				while [ "$depth" -gt 0 ]; do
 					case $bak in
 						'['*) depth=$(( depth - 1 )) ;;
 						']'*) depth=$(( depth + 1 )) ;;
 					esac
 					prog=${bak%"${bak#?}"}$prog
 					bak=${bak#?}
-					[ "$depth" -eq 0 ] && break
 				done
 			fi
 			;;
