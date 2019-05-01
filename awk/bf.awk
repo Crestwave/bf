@@ -34,11 +34,11 @@ END {
         } else if (c == "<") {
             --ptr
         } else if (c == "+") {
-            ++tape[ptr]
-            if (tape[ptr] == 256) tape[ptr] = 0
+            if (++tape[ptr] == 256)
+                tape[ptr] = 0
         } else if (c == "-") {
-            --tape[ptr]
-            if (tape[ptr] == -1) tape[ptr] = 255
+            if (--tape[ptr] == -1)
+                tape[ptr] = 255
         } else if (c == ".") {
             printf("%c", tape[ptr])
         } else if (c == ",") {
@@ -49,9 +49,11 @@ END {
                 sub(/./, "", input)
             }
         } else if (c == "[") {
-            if (tape[ptr] == 0) i = jumps[i]
+            if (! tape[ptr])
+                i = jumps[i]
         } else if (c == "]") {
-            if (tape[ptr]) i = jumps[i]
+            if (tape[ptr])
+                i = jumps[i]
         }
     }
 }
