@@ -23,7 +23,7 @@ int main(int argc, char **argv)
 		fclose(f);
 	}
 
-	for (i = 0; i < len && ++i;)
+	for (i = 0; i < len; ++i)
 		switch (program[i]) {
 		case '[':
 			stack[++ptr] = i;
