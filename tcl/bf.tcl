@@ -27,12 +27,14 @@ for {set i 0} {$i < $len} {incr i} {
             incr ptr -1
         }
         + {
-            dict set tape $ptr \
-                    [expr {[dict get [dict incr tape $ptr 1] $ptr] & 255}]
+            if {[dict get [dict incr tape $ptr 1] $ptr] == 256} {
+                dict set tape $ptr 0
+            }
         }
         - {
-            dict set tape $ptr \
-                    [expr {[dict get [dict incr tape $ptr -1] $ptr] & 255}]
+            if {[dict get [dict incr tape $ptr -1] $ptr] == -1} {
+                dict set tape $ptr 255
+            }
         }
         . {
             puts -nonewline [format %c [dict get [dict incr tape $ptr 0] $ptr]]
