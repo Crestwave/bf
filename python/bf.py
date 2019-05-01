@@ -71,7 +71,7 @@ def main():
     else:
         program = sys.stdin.read()
 
-    program = re.sub("[^][><+-.,]", '', program)
+    program = re.sub("[^><+\-.,[\]]", '', program)
     execute_bf(program)
 
 

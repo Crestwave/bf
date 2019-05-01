@@ -8,7 +8,7 @@ if (> (count $args) 0) {
   up:program = (slurp)
 }
 
-program = (re:replace '[^><+--.,[\]]' "" $program)
+program = (re:replace '[^><+\-.,[\]]' "" $program)
 len = (count $program)
 tape = [(repeat 30000 0)]
 jumps = $tape
