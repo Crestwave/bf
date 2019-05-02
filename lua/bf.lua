@@ -1,7 +1,7 @@
 #!/usr/bin/env lua
 
 local program
-if arg[1] then
+if #arg > 0 then
   local f = assert(io.open(arg[1], "r"))
   program = f:read("*all")
   f:close()
