@@ -10,10 +10,7 @@ def parse_jumps(program):
     stack = []
     jumps = {}
 
-    while index < len(program):
-        char = program[index]
-        index += 1
-
+    for index, char in enumerate(program, start=1):
         if char == '[':
             stack.append(index)
         elif char == ']':
@@ -32,11 +29,12 @@ def parse_jumps(program):
 def execute_bf(program):
     """Executes a brainfuck program"""
     jumps = parse_jumps(program)
+    length = len(program)
     tape = [0] * 30000
     ptr = 0
     index = 0
 
-    while index < len(program):
+    while index < length:
         char = program[index]
         index += 1
 
