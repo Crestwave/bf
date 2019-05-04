@@ -16,12 +16,11 @@ my %translation = (
     ']' => '}',
 );
 
-my $program;
-{
+my $program = do {
     local $/ = undef;
-    $program = <>;
-    die $! unless defined($program);
-}
+    <>;
+};
+die $! unless defined($program);
 
 $program =~ s/[^><+-.,[\]]//g;
 $program =~ s/./$translation{$&};/g;
