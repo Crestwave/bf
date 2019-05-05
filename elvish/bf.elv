@@ -11,7 +11,7 @@ if (> (count $args) 0) {
 program = (re:replace '[^><+\-.,[\]]' "" $program)
 len = (count $program)
 tape = [(repeat 30000 0)]
-jumps = $tape
+jumps = [(repeat $len 0)]
 i ptr = 0 0
 stack = []
 
