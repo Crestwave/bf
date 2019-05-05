@@ -20,14 +20,14 @@ for (my $i = 0; $i < $len; ++$i) {
     my $c = substr($program, $i, 1);
     if ($c eq '[') { push @stack, $i }
     elsif ($c eq ']') {
-        die "Missing right square bracket" unless (@stack);
+        die "Unmatched right square bracket" unless (@stack);
         my $j = pop(@stack);
         $jumps[$j] = $i;
         $jumps[$i] = $j;
     }
 }
 
-die "Unmatched right square bracket" if (@stack);
+die "Missing right square bracket" if (@stack);
 local $| = 1;
 my @tape = (0) x 30000;
 my $ptr = 0;
