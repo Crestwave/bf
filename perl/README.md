@@ -11,3 +11,10 @@ A brainfuck interpreter written in pure Perl 5
 	- Printing uninitialized cells is not allowed
 	- Negative pointers refer to cells from the end of the array
 - Output is ASCII-encoded
+
+## bf2.pl Info
+
+- `eval` is not used
+- It reads from files named in all arguments
+- End-of-files are cleared from standard input
+- Unmatched brackets are detected before runtime
