@@ -10,3 +10,9 @@ A brainfuck interpreter written in pure Lua
 - The program is transpiled into Lua then evaluated
 - Negative pointers are allowed
 - Output is ASCII-encoded
+
+## bf2.lua Info
+
+- `load`/`loadstring` is not used
+	- Unmatched brackets are detected before runtime
+- It reads from files named in all arguments
