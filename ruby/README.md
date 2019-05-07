@@ -1,4 +1,4 @@
-# bf.pl
+# bf.rb
 
 A brainfuck interpreter written in pure Ruby
 
