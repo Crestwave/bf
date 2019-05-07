@@ -19,7 +19,7 @@ ptr=0
 
 i()
 {
-	[[ -z $REPLY ]] && IFS=$'\n' read -r && REPLY+=$'\n'
+	[[ -z $REPLY ]] && read -r && REPLY+=$'\n'
 
 	[[ $REPLY ]] && {
 		local f

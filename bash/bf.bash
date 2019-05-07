@@ -41,7 +41,7 @@ for (( i = ptr = 0; i < ${#program}; ++i )); do
 			printf %b "\x$f"
 			;;
 		',')
-			[[ -z $REPLY ]] && IFS=$'\n' read -r && REPLY+=$'\n'
+			[[ -z $REPLY ]] && read -r && REPLY+=$'\n'
 
 			[[ $REPLY ]] && {
 				LC_CTYPE=C printf -v f %d "'${REPLY::1}"
