@@ -8,7 +8,7 @@ A brainfuck interpreter written in pure Perl 5
 - The program is transpiled into Perl 5 then evaluated
 - An array of 30,000 cells is initialized
 	- Cells are initialized when modified
-	- Printing uninitialized cells is not allowed
+	- Printing uninitialized cells causes a warning
 	- Negative pointers refer to cells from the end of the array
 - Output is ASCII-encoded
 
