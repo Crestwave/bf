@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+LC_ALL=C
+IFS=
 
 die()
 {
@@ -14,7 +16,7 @@ if (( $# )); then
 	fi
 else
 	mapfile -t
-	program=${MAPFILE[@]}
+	program=${MAPFILE[*]}
 fi
 
 program=${program//[^'><+-.,[]']}
