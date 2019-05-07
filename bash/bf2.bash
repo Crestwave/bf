@@ -22,18 +22,16 @@ i()
 	[[ -z $REPLY ]] && read -r && REPLY+=$'\n'
 
 	[[ $REPLY ]] && {
-		local f
-		LC_CTYPE=C printf -v f %d "'${REPLY::1}"
-		tape[$ptr]=$f
+		LC_CTYPE=C printf -v 'tape[$ptr]' %d "'${REPLY::1}"
 		REPLY=${REPLY:1}
 	}
 }
 
 o()
 {
-	local f
-	printf -v f %x "${tape[$ptr]}"
-	printf %b "\x$f"
+	local hex
+	printf -v hex %x "${tape[$ptr]}"
+	printf %b "\x$hex"
 }
 EOF
 
