@@ -15,8 +15,9 @@ if not pcall(load, "") then
 end
 
 assert(load(
-  "local a = setmetatable({}, {__index=function() return 0 end}) " ..
-  "local p = 0 " ..
+  "local a = {} " ..
+  "for i = -199, 30001 do a[i] = 0 end " ..
+  "local p = 1 " ..
   program:gsub(".", setmetatable({
     [">"] = "p = p + 1 ",
     ["<"] = "p = p - 1 ",
