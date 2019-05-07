@@ -11,3 +11,9 @@ A brainfuck interpreter written in pure Bash
 - Unmatched brackets are detected during runtime
 - Negative pointers are allowed
 - Output is ASCII-encoded
+
+
+## bf2.bash Info
+
+- The program is transpiled into Bash then evaluated
+- It reads from files named in all arguments
