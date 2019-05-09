@@ -47,7 +47,7 @@ for {set i 0} {$i < $len} {incr i} {
                 set tape($ptr) [scan $c %c]
             }
         }
-        \[ {
+        [ {
             if {$tape($ptr)} {
                 lappend stack $i
             } else {
@@ -66,7 +66,7 @@ for {set i 0} {$i < $len} {incr i} {
                 }
             }
         }
-        \] {
+        ] {
             if {$stack eq ""} {
                 error "missing open-bracket"
             }
