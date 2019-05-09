@@ -9,3 +9,9 @@ A brainfuck interpreter written in pure Tcl
 - Unmatched brackets are detected during runtime
 - An array of 30,000 cells to the right and 200 to the left is initialized
 - The locale's character set is used
+
+## bf2.tcl Info
+
+- The program is transpiled into Tcl then evaluated
+- It reads from files named in all arguments
+- Negative pointers are allowed
