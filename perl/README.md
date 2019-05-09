@@ -17,4 +17,5 @@ A brainfuck interpreter written in pure Perl 5
 - `eval` is not used
 - It reads from files named in all arguments
 - End-of-files are cleared from standard input
+- Negative pointers are allowed
 - Unmatched brackets are detected before runtime
