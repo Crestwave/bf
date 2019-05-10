@@ -5,7 +5,7 @@ A brainfuck interpreter written in pure Python
 ## Info
 
 - It is compatible with both Python 2 and 3
-- It is compliant with PEP 8 and `pylint` when it makes sense
+- It is compliant with PEP 8 and `pylint`
 - It reads the program from a file named in the first argument
 	- If there are no arguments, it reads from standard input
 - A list of 30,000 cells is initialized
