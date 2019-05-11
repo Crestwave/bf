@@ -10,7 +10,7 @@ void main (string[] args) {
     } else {
         var builder = new StringBuilder ();
         string line;
-        while ((line = stdin.read_line()) != null) {
+        while ((line = stdin.read_line ()) != null) {
             builder.append (line);
         }
         program = builder.str;
@@ -18,8 +18,8 @@ void main (string[] args) {
     }
 
     try {
-        Regex r = new Regex("""[^><+\-.,[\]]""");
-        program = r.replace(program, program.length, 0, "");
+        Regex r = new Regex ("""[^><+\-.,[\]]""");
+        program = r.replace (program, program.length, 0, "");
     } catch (RegexError e) {
         error (e.message);
     }
