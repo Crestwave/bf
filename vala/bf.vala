@@ -1,4 +1,4 @@
-void main (string[] args) {
+int main (string[] args) {
     string program;
 
     if (args.length > 1) {
@@ -89,4 +89,6 @@ void main (string[] args) {
             break;
         }
     }
+
+    return 0;
 }
