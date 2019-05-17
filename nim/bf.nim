@@ -1,9 +1,10 @@
 import os
+import tables
 
-proc parse_jumps(program: string): array[65536, int] =
+proc parse_jumps(program: string): object =
   var
     stack = newSeq[int]()
-    jumps: array[65536, int]
+    jumps = initCountTable[int]()
 
   for i, c in pairs(program):
     if c == '[':
