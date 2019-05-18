@@ -22,14 +22,14 @@ proc parse_jumps(program: string): object =
 
   result = jumps
 
-{.push overflowchecks: off.}
+{.push overflowChecks: off.}
 proc execute_bf(program: string) =
   let
     jumps = parse_jumps(program)
     programLen = len(program)
 
   var
-    tape: array[-200..29999, char]
+    tape: array[-200..299999, char]
     dataPtr = 0
     i = 0
 
