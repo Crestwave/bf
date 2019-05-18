@@ -10,10 +10,10 @@ proc parse_jumps(program: string): object =
     if c == '[':
       stack.add(i)
     elif c == ']':
-      if stack.len < 1:
+      if stack.len == 0:
         quit("] without a corresponding [")
 
-      var j = stack.pop
+      var j = pop(stack)
       jumps[i] = j
       jumps[j] = i
 
@@ -26,7 +26,7 @@ proc parse_jumps(program: string): object =
 proc execute_bf(program: string) =
   let
     jumps = parse_jumps(program)
-    programLen = program.len
+    programLen = len(program)
 
   var
     tape: array[-200..29999, char]
@@ -44,7 +44,7 @@ proc execute_bf(program: string) =
       flushFile(stdout)
     of ',':
       if not endOfFile(stdin):
-        tape[dataPtr] = stdin.readChar
+        tape[dataPtr] = readChar(stdin)
     of '[':
       if tape[dataPtr] == '\0':
         i = jumps[i]
