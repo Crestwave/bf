@@ -1,4 +1,3 @@
-import os
 import tables
 
 proc parse_jumps(program: string): object =
@@ -56,7 +55,9 @@ proc execute_bf(program: string) =
 {.pop.}
 
 when isMainModule:
+  import os
   var program: string
+
   try:
     program = if paramCount() > 0: readFile(paramStr(1))
               else: readAll(stdin)
