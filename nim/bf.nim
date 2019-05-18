@@ -10,14 +10,14 @@ proc parse_jumps(program: string): object =
     if c == '[':
       stack.add(i)
     elif c == ']':
-      if stack.len == 0:
+      if len(stack) == 0:
         quit("] without a corresponding [")
 
       var j = pop(stack)
       jumps[i] = j
       jumps[j] = i
 
-  if stack.len > 0:
+  if len(stack) > 0:
     quit("[ without a corresponding ]")
 
   result = jumps
@@ -58,8 +58,8 @@ proc execute_bf(program: string) =
 when isMainModule:
   var program: string
   try:
-    program = if paramCount() > 0: paramStr(1).readFile
-              else: stdin.readAll
+    program = if paramCount() > 0: readFile(paramStr(1))
+              else: readAll(stdin)
   except IOError:
     quit("I/O error: " & getCurrentExceptionMsg())
 
