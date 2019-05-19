@@ -7,7 +7,7 @@ translation = {
   '+' => 'a[p] = a[p]+1 & 255;',
   '-' => 'a[p] = a[p]-1 & 255;',
   '.' => 'putc a[p].chr;',
-  ',' => 'a[p] = $stdin.getbyte unless $stdin.eof;',
+  ',' => 'a[p] = $stdin.getbyte unless $stdin.eof?;',
   '[' => 'while a[p].nonzero? do ',
   ']' => 'end;'
 }
