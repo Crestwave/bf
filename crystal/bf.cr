@@ -31,8 +31,9 @@ while i < len
   when '.'
     print tape[ptr].chr
   when ','
-    c = STDIN.read_byte
-    tape[ptr] = c if c
+    if c = STDIN.read_byte
+      tape[ptr] = c
+    end
   when '['
     i = jumps[i] if tape[ptr].zero?
   when ']'
