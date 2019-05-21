@@ -14,6 +14,7 @@ void main(List<String> arguments) {
     program = new File(arguments[0]).readAsStringSync();
   }
 
+  program = program.replaceAll(RegExp(r'[^><+\-.,[\]]'), '');
   var len = program.length;
   var jumps = new List(len);
   var stack = [];
