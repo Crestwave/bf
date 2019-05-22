@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 program = ARGF.read
-len = program.length
+program.gsub!(/[^><+\-.,\[\]]/, '')
 
 stack = []
 jumps = []
@@ -15,6 +15,7 @@ program.each_char.with_index do |c, i|
   end
 end
 
+len = program.length
 tape = Hash.new(0)
 ptr = 0
 i = 0
