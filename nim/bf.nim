@@ -2,8 +2,8 @@ import tables
 
 proc parse_jumps(program: string): object =
   var
-    stack = newSeq[int]()
     jumps = initCountTable[int]()
+    stack = newSeq[int]()
 
   for i, c in pairs(program):
     if c == '[':
@@ -28,27 +28,27 @@ proc execute_bf(program: string) =
     programLen = len(program)
 
   var
-    tape: array[-200..299999, char]
-    dataPtr = 0
     i = 0
+    pos = 0
+    tape: array[-200..299999, char]
 
   while i < programLen:
     case program[i]
-    of '>': inc(dataPtr)
-    of '<': dec(dataPtr)
-    of '+': inc(tape[dataPtr])
-    of '-': dec(tape[dataPtr])
+    of '>': inc(pos)
+    of '<': dec(pos)
+    of '+': inc(tape[pos])
+    of '-': dec(tape[pos])
     of '.':
-      stdout.write(tape[dataPtr])
+      stdout.write(tape[pos])
       flushFile(stdout)
     of ',':
       if not endOfFile(stdin):
-        tape[dataPtr] = readChar(stdin)
+        tape[pos] = readChar(stdin)
     of '[':
-      if tape[dataPtr] == '\0':
+      if tape[pos] == '\0':
         i = jumps[i]
     of ']':
-      if tape[dataPtr] != '\0':
+      if tape[pos] != '\0':
         i = jumps[i]
     else: discard
     inc i
