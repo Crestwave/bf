@@ -1,3 +1,4 @@
+#!/usr/bin/env dart
 import 'dart:io';
 import 'dart:typed_data';
 
