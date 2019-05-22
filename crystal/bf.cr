@@ -1,3 +1,4 @@
+#!/usr/bin/env crystal
 program = ARGF.gets("") || ""
 len = program.size
 
