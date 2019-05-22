@@ -1,6 +1,6 @@
 #!/usr/bin/env crystal
 program = ARGF.gets("") || ""
-len = program.size
+program = program.gsub(/[^><+\-.,\[\]]/, "")
 
 stack = [] of Int32
 jumps = {} of Int32 => Int32
@@ -16,6 +16,7 @@ program.each_char.with_index do |c, i|
 end
 
 tape = Array.new(300_000, 0_u8)
+len = program.size
 ptr = 0
 i = 0
 
