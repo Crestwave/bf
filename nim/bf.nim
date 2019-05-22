@@ -28,9 +28,8 @@ proc execute_bf(program: string) =
     programLen = len(program)
 
   var
-    i = 0
-    pos = 0
     tape: array[-200..299999, char]
+    i, pos = 0
 
   while i < programLen:
     case program[i]
