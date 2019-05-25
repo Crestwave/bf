@@ -42,22 +42,23 @@ fn main() -> io::Result<()> {
     let mut ptr: u16 = 0;
     let mut i = 0;
     while i < len {
+        let j = ptr as usize;
         match program[i] {
             '>' => ptr += 1,
             '<' => ptr -= 1,
-            '+' => tape[ptr as usize] += 1,
-            '-' => tape[ptr as usize] -= 1,
+            '+' => tape[j] += 1,
+            '-' => tape[j] -= 1,
             ',' => match io::stdin().bytes().next() {
-                Some(Ok(c))  => tape[ptr as usize] = c,
+                Some(Ok(c))  => tape[j] = c,
                 Some(Err(e)) => panic!(e),
                 None         => (),
             },
             '.' => {
-                print!("{}", tape[ptr as usize] as char);
+                print!("{}", tape[j] as char);
                 io::stdout().flush()?;
             },
-            '[' if tape[ptr as usize] == 0 => i = jumps[&i],
-            ']' if tape[ptr as usize] != 0 => i = jumps[&i],
+            '[' if tape[j] == 0 => i = jumps[&i],
+            ']' if tape[j] != 0 => i = jumps[&i],
             _ => (),
         }
         i += 1;
