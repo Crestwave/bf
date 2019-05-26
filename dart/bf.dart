@@ -39,10 +39,10 @@ void main(List<String> arguments) {
   for (var i = 0; i < len; ++i) {
     switch (program[i]) {
       case '>':
-        ptr = ptr+1 & 65535;
+        ptr = ptr + 1 & 65535;
         break;
       case '<':
-        ptr = ptr-1 & 65535;
+        ptr = ptr - 1 & 65535;
         break;
       case '+':
         ++tape[ptr];
