@@ -48,15 +48,17 @@ fn main() -> io::Result<()> {
             '<' => ptr -= 1,
             '+' => tape[j] += 1,
             '-' => tape[j] -= 1,
-            ',' => match io::stdin().bytes().next() {
-                Some(Ok(c))  => tape[j] = c,
-                Some(Err(e)) => panic!(e),
-                None         => (),
-            },
+            ',' => {
+                match io::stdin().bytes().next() {
+                    Some(Ok(c)) => tape[j] = c,
+                    Some(Err(e)) => panic!(e),
+                    None => (),
+                }
+            }
             '.' => {
                 print!("{}", tape[j] as char);
                 io::stdout().flush()?;
-            },
+            }
             '[' if tape[j] == 0 => i = jumps[&i],
             ']' if tape[j] != 0 => i = jumps[&i],
             _ => (),
