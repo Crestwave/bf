@@ -6,6 +6,7 @@ import (
 	"io"
 	"io/ioutil"
 	"os"
+	"regexp"
 )
 
 func main() {
@@ -23,6 +24,9 @@ func main() {
 			panic(err)
 		}
 	}
+
+	re := regexp.MustCompile(`[^><+\-.,[\]]`)
+	program = re.ReplaceAll(program, []byte{})
 
 	jumps := make(map[int]int)
 	var stack []int
@@ -48,11 +52,12 @@ func main() {
 		panic("syntax error: unexpected ]")
 	}
 
-	var ptr uint16
-	var tape [65536]uint8
-
 	reader := bufio.NewReader(os.Stdin)
 	l := len(program)
+
+	var tape [65536]uint8
+	var ptr uint16
+
 	for i := 0; i < l; i++ {
 		switch program[i] {
 		case '>':
