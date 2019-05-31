@@ -19,24 +19,28 @@ fn main() -> io::Result<()> {
         buf.chars().collect()
     };
 
-    let mut jumps = HashMap::new();
-    let mut stack = Vec::new();
-    for (i, c) in program.iter().enumerate() {
-        if c == &'[' {
-            stack.push(i);
-        } else if c == &']' {
-            if stack.is_empty() {
-                panic!("un-closed '['");
-            }
-            let j = stack.pop().unwrap();
-            jumps.insert(i, j);
-            jumps.insert(j, i);
-        }
-    }
+    let jumps = {
+        let mut builder = HashMap::new();
+        let mut stack = Vec::new();
+        for (i, c) in program.iter().enumerate() {
+            if c == &'[' {
+                stack.push(i);
+            } else if c == &']' {
+                if stack.is_empty() {
+                    panic!("un-closed '['");
+                }
 
-    if !stack.is_empty() {
-        panic!("unexpected ']'");
-    }
+                let j = stack.pop().unwrap();
+                builder.insert(i, j);
+                builder.insert(j, i);
+            }
+        }
+
+        if !stack.is_empty() {
+            panic!("unexpected ']'");
+        }
+        builder
+    };
 
     let mut tape: [u8; 65536] = [0; 65536];
     let mut ptr: u16 = 0;
