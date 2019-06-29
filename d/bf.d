@@ -10,12 +10,12 @@ void main(in string[] args)
 
     auto re = regex(r"[^><\+\-.,\[\]]");
     program = program.replaceAll(re, "");
-    ulong len = program.length;
+    size_t len = program.length;
 
-    int[int] jumps;
-    int[] stack;
+    size_t[size_t]jumps;
+    size_t[] stack;
 
-    foreach (int i, char c; program)
+    foreach (i, c; program)
         if (c == '[')
         {
             stack ~= i;
@@ -25,7 +25,7 @@ void main(in string[] args)
             if (stack.empty)
                 throw new Exception("unmatched ']'");
 
-            int j = stack.back;
+            size_t j = stack.back;
             stack.popBack();
             jumps[i] = j;
             jumps[j] = i;
@@ -37,7 +37,7 @@ void main(in string[] args)
     char[65536] tape = '\0';
     ushort ptr;
 
-    for (int i = 0; i < len; ++i)
+    for (size_t i = 0; i < len; ++i)
         switch (program[i])
         {
             case '>':
