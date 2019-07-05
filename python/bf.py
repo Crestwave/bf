@@ -10,7 +10,7 @@ def parse_jumps(program):
     stack = []
     jumps = {}
 
-    for index, char in enumerate(program, start=1):
+    for index, char in enumerate(program):
         if char == '[':
             stack.append(index)
         elif char == ']':
@@ -36,7 +36,6 @@ def execute_bf(program):
 
     while index < length:
         char = program[index]
-        index += 1
 
         if char == '>':
             ptr += 1
@@ -59,6 +58,8 @@ def execute_bf(program):
         elif char == ']':
             if tape[ptr] != 0:
                 index = jumps[index]
+
+        index += 1
 
 
 def main():
