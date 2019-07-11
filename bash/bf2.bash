@@ -3,9 +3,8 @@ LC_ALL=C
 IFS=
 
 if (( $# )); then
-	while (( $# )); do
-		program+=$(< "$1") || exit
-		shift
+    for arg; do
+		program+=$(< "$arg") || exit
 	done
 else
 	mapfile -t
