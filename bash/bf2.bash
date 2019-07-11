@@ -21,7 +21,7 @@ i()
 	[[ -z $REPLY ]] && read -r && REPLY+=$'\n'
 
 	[[ $REPLY ]] && {
-		LC_CTYPE=C printf -v 'a[$p]' %d "'${REPLY::1}"
+		printf -v 'a[$p]' %d "'${REPLY::1}"
 		REPLY=${REPLY:1}
 	}
 }
