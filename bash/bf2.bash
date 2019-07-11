@@ -1,9 +1,7 @@
 #!/usr/bin/env bash
-LC_ALL=C
-IFS=
 
 if (( $# )); then
-    for arg; do
+	for arg; do
 		program+=$(< "$arg") || exit
 	done
 else
@@ -14,6 +12,8 @@ fi
 program=${program//[^'><+-.,[]']}
 IFS= read -d "" -r translation <<'EOF'
 declare -A a
+LC_ALL=C
+IFS=
 p=0
 
 i()
