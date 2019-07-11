@@ -14,15 +14,15 @@ fi
 
 program=${program//[^'><+-.,[]']}
 IFS= read -d "" -r translation <<'EOF'
-declare -A tape
-ptr=0
+declare -A a
+p=0
 
 i()
 {
 	[[ -z $REPLY ]] && read -r && REPLY+=$'\n'
 
 	[[ $REPLY ]] && {
-		LC_CTYPE=C printf -v 'tape[$ptr]' %d "'${REPLY::1}"
+		LC_CTYPE=C printf -v 'a[$p]' %d "'${REPLY::1}"
 		REPLY=${REPLY:1}
 	}
 }
@@ -30,20 +30,20 @@ i()
 o()
 {
 	local hex
-	printf -v hex %x "${tape[$ptr]}"
+	printf -v hex %x "${a[$p]}"
 	printf %b "\x$hex"
 }
 EOF
 
 for (( i = 0; i < ${#program}; ++i )); do
 	case ${program:i:1} in
-		'>'): '(( ++ptr ))' ;;
-		'<'): '(( --ptr ))' ;;
-		'+'): '(( tape[$ptr] = tape[$ptr]+1 & 255 ))' ;;
-		'-'): '(( tape[$ptr] = tape[$ptr]-1 & 255 ))' ;;
+		'>'): '(( ++p ))' ;;
+		'<'): '(( --p ))' ;;
+		'+'): '(( a[$p] = a[$p]+1 & 255 ))' ;;
+		'-'): '(( a[$p] = a[$p]-1 & 255 ))' ;;
 		'.'): 'o' ;;
 		','): 'i' ;;
-		'['): 'while (( tape[$ptr] )); do :' ;;
+		'['): 'while (( a[$p] )); do :' ;;
 		']'): 'done' ;;
 	esac
 	translation+=$_$'\n'
