@@ -2,7 +2,7 @@ import tables
 
 proc parse_jumps(program: string): object =
   var
-    jumps = initCountTable[int]()
+    jumps = initTable[int, int]()
     stack = newSeq[int]()
 
   for i, c in pairs(program):
