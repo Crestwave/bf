@@ -5,20 +5,20 @@ use std::io;
 use std::io::prelude::*;
 
 fn main() -> io::Result<()> {
-    let len;
     let program: Vec<char> = {
         let mut buf = String::new();
         if let Some(filename) = env::args().nth(1) {
             let mut f = File::open(filename)?;
-            len = f.read_to_string(&mut buf)?;
+            f.read_to_string(&mut buf)?;
         } else {
             let stdin = io::stdin();
             let mut handle = stdin.lock();
-            len = handle.read_to_string(&mut buf)?;
+            handle.read_to_string(&mut buf)?;
         }
-        buf.chars().collect()
+        buf.chars().filter(|&c| "><+-,.[]".contains(c)).collect()
     };
 
+    let len = program.len();
     let jumps = {
         let mut builder = HashMap::new();
         let mut stack = Vec::new();
