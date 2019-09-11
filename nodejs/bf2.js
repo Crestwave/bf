@@ -9,7 +9,6 @@ else
     program = fs.readFileSync(0, 'ascii');
 
 program = program.replace(/[^><+\-.,[\]]/g, '');
-const len = program.length;
 let a = [];
 let p = 0;
 let buf = new Int8Array(1);
