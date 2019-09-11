@@ -15,7 +15,7 @@ for (let i = 0; i < len; ++i) {
             break;
     case ']':
             if (!stack.length)
-                throw new Error("SyntaxError: Unexpected token ]");
+                throw new Error('SyntaxError: Unexpected token ]');
 
             let j = stack.pop();
             jumps[j] = i;
@@ -25,7 +25,7 @@ for (let i = 0; i < len; ++i) {
 }
 
 if (stack.length)
-    throw new Error("SyntaxError: Expecting token ]");
+    throw new Error('SyntaxError: Expecting token ]');
 
 let tape = [];
 let ptr = 0;
