@@ -55,7 +55,7 @@ for (let i = 0; i < len; ++i)
                 tape[ptr] = buf[0];
             break;
         case '[':
-            if (! tape[ptr])
+            if (!tape[ptr])
                 i = jumps[i];
             break;
         case ']':
