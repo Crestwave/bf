@@ -5,8 +5,8 @@ const program = fs
     .replace(/[^><+\-.,[\]]/g, '');
 const len = program.length;
 
-let stack = [];
-let jumps = [];
+const stack = [];
+const jumps = [];
 
 for (let i = 0; i < len; ++i) {
     switch (program[i]) {
@@ -27,39 +27,37 @@ for (let i = 0; i < len; ++i) {
 if (stack.length)
     throw new Error('SyntaxError: Expecting token ]');
 
-let tape = [];
-let ptr = 0;
-for (let i = -200; i < 30000; ++i)
-    tape[i] = 0;
+const tape = new Uint8Array(65536);
+const ptr = new Uint16Array(1);
 
 for (let i = 0; i < len; ++i)
     switch (program[i]) {
         case '>':
-            ++ptr;
+            ++ptr[0];
             break;
         case '<':
-            --ptr;
+            --ptr[0];
             break;
         case '+':
-            tape[ptr] = tape[ptr]+1 & 255;
+            ++tape[ptr[0]];
             break;
         case '-':
-            tape[ptr] = tape[ptr]-1 & 255;
+            --tape[ptr[0]];
             break;
         case '.':
-            process.stdout.write(String.fromCharCode(tape[ptr]));
+            process.stdout.write(String.fromCharCode(tape[ptr[0]]));
             break;
         case ',':
             let buf = new Int8Array(1)
             if (fs.readSync(0, buf, 0, 1))
-                tape[ptr] = buf[0];
+                tape[ptr[0]] = buf[0];
             break;
         case '[':
-            if (!tape[ptr])
+            if (!tape[ptr[0]])
                 i = jumps[i];
             break;
         case ']':
-            if (tape[ptr])
+            if (tape[ptr[0]])
                 i = jumps[i];
             break;
     }
