@@ -3,12 +3,11 @@ const fs = require('fs');
 const program = fs
     .readFileSync(process.argv[2] || 0, 'ascii')
     .replace(/[^><+\-.,[\]]/g, '');
-const len = program.length;
 
 const stack = [];
 const jumps = [];
 
-for (let i = 0; i < len; ++i) {
+for (let i = 0; i < program.length; ++i) {
     switch (program[i]) {
     case '[':
             stack.push(i);
@@ -30,7 +29,7 @@ if (stack.length)
 const tape = new Uint8Array(65536);
 const ptr = new Uint16Array(1);
 
-for (let i = 0; i < len; ++i)
+for (let i = 0; i < program.length; ++i)
     switch (program[i]) {
         case '>':
             ++ptr[0];
