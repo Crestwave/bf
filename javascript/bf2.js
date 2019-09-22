@@ -9,9 +9,9 @@ else
     program = fs.readFileSync(0, 'ascii');
 
 program = program.replace(/[^><+\-.,[\]]/g, '');
-let a = [];
+const a = [];
 let p = 0;
-let buf = new Int8Array(1);
+const buf = new Int8Array(1);
 
 const translation = {
     '>': '++p;',
