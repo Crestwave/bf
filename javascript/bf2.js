@@ -2,9 +2,9 @@
 let program;
 const fs = require('fs');
 if (process.argv.length > 2)
-    process.argv.slice(2, process.argv.length).forEach(arg => {
-        program += fs.readFileSync(arg, 'ascii');
-    });
+    for (let i = 2; i < process.argv.length; ++i) {
+        program += fs.readFileSync(process.argv[i], 'ascii');
+    }
 else
     program = fs.readFileSync(0, 'ascii');
 
