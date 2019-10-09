@@ -4,7 +4,7 @@ void main(in string[] args)
 
     char[] program;
     if (args.length > 1)
-        program = cast(char[])read(args[1]);
+        program = cast(char[]) read(args[1]);
     else
         stdin.readf("%s", program);
 
