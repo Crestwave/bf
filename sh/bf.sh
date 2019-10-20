@@ -1,79 +1,80 @@
 #!/bin/sh
-LC_ALL=C \
-IFS= \
+LC_ALL=C
+IFS=' '
 n='
-' \
-tape_right=0 \
-tape_left=0 \
+'
 val=0
 
-read_prog()
-while read -r line || case $line in '')break; esac; do
-	prog=$prog$line
-done
+if [ "$#" -gt 0 ]; then
+	while read -r line || [ -n "$line" ]; do
+		prog=$prog$line
+	done < "$1" || exit
+else
+	while read -r line || [ -n "$line" ]; do
+		prog=$prog$line
+	done
+fi
 
-case $# in 0)
-	read_prog
-;;*)
-	read_prog < "$1" || exit
-esac
-
-while case : in '')esac; do
+while :; do
 	case $prog in
 		'>'*)
-			tape_left="$val $tape_left" \
-			val=${tape_right%% *} \
-			tape_right=${tape_right#* }
+			set -- ${tape_right:-0}
+			tape_left="$val $tape_left"
+			val=$1
+			shift
+			tape_right=$*
 			;;
 		'<'*)
-			tape_right="$val $tape_right" \
-			val=${tape_left%% *} \
-			tape_left=${tape_left#* }
+			set -- ${tape_left:-0}
+			tape_right="$val $tape_right"
+			val=$1
+			shift
+			tape_left=$*
 			;;
 		'+'*)
-			val=$(( val+1 & 255 ))
+			val=$(( val + 1 ))
+			[ "$val" -eq 256 ] && val=0
 			;;
 		'-'*)
-			val=$(( val-1 & 255 ))
+			val=$(( val - 1 ))
+			[ "$val" -eq -1 ] && val=255
 			;;
 		'.'*)
 			printf "\\$(printf %o "$val")"
 			;;
 		','*)
-			case $input in '')
-				read -r input && input=$input$n
-			esac
+			[ -z "$input" ] && read -r input && input=$input$n
 
-			case $input in ?*)
-				val=$(printf %d "'${input%"${input#?}"}") \
+			if [ -n "$input" ]; then
+				val=$(printf %d "'${input%"${input#?}"}")
 				input=${input#?}
-			esac
+			fi
 			;;
 		'['*)
-			case $val in 0)
+			if [ "$val" -eq 0 ]; then
 				depth=1
-				while case $depth in 0)break; esac; do
-					bak=${prog%"${prog#["><+-.,[]"]}"}$bak \
+				while [ "$depth" -gt 0 ]; do
+					bak=${prog%"${prog#["><+-.,[]"]}"}$bak
 					prog=${prog#?}
 					case $prog in
-						']'*) depth=$(( depth - 1 )) ;;
 						'['*) depth=$(( depth + 1 )) ;;
+						']'*) depth=$(( depth - 1 )) ;;
 					esac
 				done
-			esac
+			fi
 			;;
 		']'*)
-			case $val in 0);;*)
+			if [ "$val" -ne 0 ]; then
 				depth=1
-				while case $depth in 0)break; esac; do
+				while [ "$depth" -gt 0 ]; do
 					case $bak in
 						'['*) depth=$(( depth - 1 )) ;;
 						']'*) depth=$(( depth + 1 )) ;;
 					esac
-					prog=${bak%"${bak#?}"}$prog \
+					prog=${bak%"${bak#?}"}$prog
 					bak=${bak#?}
 				done
-			esac
+			fi
 			;;
 		'')
 			break
@@ -81,7 +82,8 @@ while case : in '')esac; do
 		*)
 			prog=${prog#?}
 			continue
+			;;
 	esac
-	bak=${prog%"${prog#?}"}$bak \
+	bak=${prog%"${prog#?}"}$bak
 	prog=${prog#?}
 done
