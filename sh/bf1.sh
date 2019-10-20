@@ -8,7 +8,7 @@ tape_left=0 \
 val=0
 
 read_prog()
-while read -r line || case $line in '')return; esac; do
+while read -r line || case $line in '')break; esac; do
 	prog=$prog$line
 done
 
