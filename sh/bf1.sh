@@ -1,6 +1,7 @@
 #!/bin/sh
 LC_ALL=C \
-IFS= \
+IFS=' 	
+' \
 n='
 ' \
 tape_right=0 \
@@ -12,12 +13,14 @@ while read -r line || case $line in '')break; esac; do
 	prog=$prog$line
 done
 
+
 case $# in 0)
 	read_prog
 ;;*)
 	read_prog < "$1" || exit
 esac
 
+IFS=
 while case : in '')esac; do
 	case $prog in
 		'>'*)
