@@ -6,7 +6,9 @@ n='
 ' \
 tape_right=0 \
 tape_left=0 \
-val=0
+val=0 \
+prog= \
+bak=
 
 read_prog()
 while read -r line || case $line in '')break; esac; do
