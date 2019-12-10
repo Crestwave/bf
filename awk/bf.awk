@@ -42,11 +42,11 @@ END {
         } else if (c == ".") {
             printf("%c", tape[ptr])
         } else if (c == ",") {
-            if (length(input) == 0 && getline input < "-")
+            if (! input && getline input < "-")
                 input = input "\n"
-            if (length(input)) {
+            if (input) {
                 tape[ptr] = ord[substr(input, 1, 1)]
-                sub(/./, "", input)
+                input = substr(input, 2)
             }
         } else if (c == "[") {
             if (! tape[ptr])
