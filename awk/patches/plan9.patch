@@ -1,0 +1,20 @@
+--- a/bf.awk
++++ b/bf.awk
+@@ -10,7 +10,7 @@
+ }
+ 
+ {
+-    gsub(/[^][><.,+-]/, "")
++    gsub(/[^><+\-.,[\]]/, "")
+     program = program $0
+ }
+ 
+@@ -46,7 +46,7 @@
+                 input = input "\n"
+             if (input) {
+                 tape[ptr] = ord[substr(input, 1, 1)]
+-                sub(/./, "", input)
++                input = substr(input, 2)
+             }
+         } else if (c == "[") {
+             if (! tape[ptr])

@@ -1,0 +1,19 @@
+--- a/bf.awk
++++ b/bf.awk
+@@ -15,6 +15,7 @@
+ }
+ 
+ END {
++    ARGV[ARGC++] = "-"
+     len = length(program)
+     for (i = 1; i <= len; ++i) {
+         c = substr(program, i, 1)
+@@ -42,7 +43,7 @@
+         } else if (c == ".") {
+             printf("%c", tape[ptr])
+         } else if (c == ",") {
+-            if (! input && getline input <"-")
++            if (! input && getline input)
+                 input = input "\n"
+             if (input) {
+                 tape[ptr] = ord[substr(input, 1, 1)]

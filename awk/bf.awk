@@ -30,9 +30,9 @@ END {
     for (i = 1; i <= len; ++i) {
         c = substr(program, i, 1)
         if (c == ">") {
-            ++ptr
+            ptr += 1
         } else if (c == "<") {
-            --ptr
+            ptr -= 1
         } else if (c == "+") {
             if (++tape[ptr] == 256)
                 tape[ptr] = 0
@@ -42,11 +42,11 @@ END {
         } else if (c == ".") {
             printf("%c", tape[ptr])
         } else if (c == ",") {
-            if (! input && getline input < "-")
+            if (! input && getline input <"-")
                 input = input "\n"
             if (input) {
                 tape[ptr] = ord[substr(input, 1, 1)]
-                input = substr(input, 2)
+                sub(/./, "", input)
             }
         } else if (c == "[") {
             if (! tape[ptr])
