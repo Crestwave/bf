@@ -42,14 +42,14 @@ END {
         } else if (c == ".") {
             printf("%c", tape[ptr])
         } else if (c == ",") {
-            if (! input && getline input <"-")
+            if (!input && getline input <"-")
                 input = input "\n"
             if (input) {
                 tape[ptr] = ord[substr(input, 1, 1)]
                 sub(/./, "", input)
             }
         } else if (c == "[") {
-            if (! tape[ptr])
+            if (!tape[ptr])
                 i = jumps[i]
         } else if (c == "]") {
             if (tape[ptr])
