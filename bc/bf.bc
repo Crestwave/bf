@@ -1,0 +1,47 @@
+#!/usr/bin/env bc
+while (c = read() != 33)
+	prog[len++] = c
+
+for (i = 0; i < len; ++i) {
+	c = prog[i]
+	if (c == 62)
+		ptr += 1
+	if (c == 60)
+		ptr -= 1
+	if (c == 43)
+		if (++tape[ptr] == 256)
+			tape[ptr] = 0
+	if (c == 45)
+		if (--tape[ptr] == -1)
+			tape[ptr] = 255
+	if (c == 46)
+		tape[ptr]
+	if (c == 44)
+		if (!eof) {
+			d = read()
+			if (d == -1)
+				eof = 1
+			if (d != -1)
+				tape[ptr] = d
+		}
+	if (c == 91) {
+		if (tape[ptr])
+			stack[++j] = i
+		if (!tape[ptr])
+			for (depth = 1; depth > 0 && ++i;) {
+				d = prog[i]
+				if (d == 91)
+					depth += 1
+				if (d == 93)
+					depth -= 1
+			}
+	}
+	if (c == 93) {
+		if (tape[ptr])
+			i = stack[j]
+		if (!tape[ptr])
+			j -= 1
+	}
+}
+
+quit
