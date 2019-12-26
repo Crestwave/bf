@@ -10,26 +10,21 @@ done < "$1" || exit
 while [ -n "$prog" ]; do
 	c=${prog%"${prog#?}"}
 	prog=${prog#?}
-	case $c in
-		["><+-.,[]"])
-			program=$program$(printf %d "'$c")$n
+	case $c in ["><+-.,[]"])
+		program=$program$(printf %d "'$c")$n
 	esac
 done
 
 program=${program}33$n
-
 dir=${0%/}
-dir=${dir%%/*}
+dir=${dir%/*}
 
 {
 	printf %s "$program"
 	while input=; do
-		if read -r line; then
-			eof=0
-		else
-			[ -z "$line" ] && break
-			eof=1
-		fi
+		read -r line
+		eof=$?
+		[ "$eof" != 0 ] && [ -z "$line" ] && break
 
 		while [ -n "$line" ]; do
 			input=$input$(printf %d "'${line%"${line#?}"}")$n
