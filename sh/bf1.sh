@@ -1,7 +1,5 @@
 #!/bin/sh
 LC_ALL=C \
-IFS='	
-' \
 n='
 ' \
 tape_right=0 \
@@ -19,7 +17,7 @@ done
 case $# in 0)
 	read_prog
 ;;*)
-	read_prog < "$1" || exit
+	read_prog <"$1" || exit
 esac
 
 IFS=
