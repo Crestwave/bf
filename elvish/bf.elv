@@ -17,7 +17,6 @@ stack = []
 
 while (< $i $len) {
   c = $program[$i]
-  i = (+ $i 1)
   if (eq $c "[") {
     stack = [$@stack $i]
   } elif (eq $c "]") {
@@ -29,6 +28,7 @@ while (< $i $len) {
     jumps[$j] = $i
     jumps[$i] = $j
   }
+  i = (+ $i 1)
 }
 if (> (count $stack) 0) {
   fail "unmatched '['"
@@ -37,8 +37,6 @@ if (> (count $stack) 0) {
 i = 0
 while (< $i $len) {
   c = $program[$i]
-  i = (+ $i 1)
-
   if (eq $c ">") {
     ptr = (+ $ptr 1)
   } elif (eq $c "<") {
@@ -57,12 +55,7 @@ while (< $i $len) {
     print (chr $tape[$ptr])
   } elif (eq $c ",") {
     if (== (count $input) 0) {
-      input = (
-        elvish -c 'each [line]{
-          echo $line
-          exit
-        }' | slurp
-      )
+      input = (read-upto "\n")
     }
     if (> (count $input) 0) {
       tape[$ptr] = (ord $input[0])
@@ -77,4 +70,5 @@ while (< $i $len) {
       i = $jumps[$i]
     }
   }
+  i = (+ $i 1)
 }
