@@ -8,5 +8,5 @@ A brainfuck interpreter written in pure rc
 	- I also tried to use as few external utilities as few times as possible; the current list is `ascii`, `bc`, `echo`, and `read`.
 - It reads the program from a file named in the first argument
 	- If there are no arguments, it reads from standard input
-- An array with the length of 30,000 cells is created
-- There currently seems to be problems with complex programs, likely from nested brackets
+- An array with around 30,000 cells to the right and 2,000 to the left is created
+- Output is ASCII-encoded
