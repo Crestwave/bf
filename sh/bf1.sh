@@ -40,7 +40,7 @@ while case : in '')esac; do
 			val=$(( val-1 & 255 ))
 			;;
 		'.'*)
-			printf \\$(( val / 64 ))$(( val/8 & 7 ))$(( val & 7 ))
+			printf "\\$(( val / 64 ))$(( val/8 & 7 ))$(( val & 7 ))"
 			;;
 		','*)
 			case $input in '')
