@@ -8,15 +8,32 @@ die()
 	exit 1
 }
 
-if (( $# )); then
-	if [[ -e $1 ]]; then
-		program=$(< "$1")
+# program comes from -c flag
+program=''
+while getopts 'c:' flag; do 
+	case $flag in
+	c)
+		program=$OPTARG
+		;;
+	'?')
+		exit 1  # usage error occured, and bash printed a diagnostic
+		;;
+	esac
+done
+
+if test -z "$program"; then  # corner case: -c '' gets here
+	if (( $# )); then
+		# program comes from filename argument
+		if [[ -e $1 ]]; then
+			program=$(< "$1")
+		else
+			die "file '$1' does not exist"
+		fi
 	else
-		die "file '$1' does not exist"
+		# program comes from stdin
+		mapfile -t
+		program=${MAPFILE[*]}
 	fi
-else
-	mapfile -t
-	program=${MAPFILE[*]}
 fi
 
 program=${program//[^'><+-.,[]']}
