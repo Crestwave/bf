@@ -1,8 +1,9 @@
 #!/usr/bin/env swift
 import Foundation
 
-let stderr = FileHandle.standardError
 var program = ""
+let stderr = FileHandle.standardError
+
 if CommandLine.argc > 1 {
     do {
         program = try String(contentsOfFile: CommandLine.arguments[1])
@@ -79,6 +80,7 @@ while (i < len) {
                 line = input!
             }
         }
+
         if line.count > 0 {
             tape[ptr] = Int(UnicodeScalar(String(line
                             .remove(at: line.startIndex)))!.value)
