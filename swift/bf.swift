@@ -2,6 +2,7 @@
 import Foundation
 
 let stderr = FileHandle.standardError
+
 var program = ""
 
 if CommandLine.argc > 1 {
@@ -44,6 +45,7 @@ if stack.count > 0 {
 }
 
 let len = program.count
+
 var i = 0
 var line: String = ""
 var ptr = 0
@@ -51,6 +53,7 @@ var tape = Array(repeating: 0, count: 30000)
 
 while (i < len) {
     let c = program[program.index(program.startIndex, offsetBy: i)]
+
     if c == ">" {
         ptr += 1
         if ptr == 30000 {
