@@ -1,7 +1,7 @@
 #!/usr/bin/env swift
 import Foundation
-let stderr = FileHandle.standardError
 
+let stderr = FileHandle.standardError
 var program = ""
 
 if CommandLine.argc > 1 {
