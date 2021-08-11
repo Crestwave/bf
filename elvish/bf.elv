@@ -1,5 +1,6 @@
 #!/usr/bin/env elvish
 use re
+use str
 
 program input = "" ""
 if (> (count $args) 0) {
@@ -52,13 +53,13 @@ while (< $i $len) {
       tape[$ptr] = 255
     }
   } elif (eq $c ".") {
-    print (chr $tape[$ptr])
+    print (str:from-codepoints $tape[$ptr])
   } elif (eq $c ",") {
     if (== (count $input) 0) {
       input = (read-upto "\n")
     }
     if (> (count $input) 0) {
-      tape[$ptr] = (ord $input[0])
+      tape[$ptr] = (str:to-codepoints $input[0])
       input = $input[1:]
     }
   } elif (eq $c "[") {
