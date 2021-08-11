@@ -17,6 +17,8 @@ if CommandLine.argc > 1 {
     }
 }
 
+program = program.filter("><+-.,[]".contains)
+
 var jumps = Array(repeating: 0, count: program.count)
 var stack: [Int] = []
 
