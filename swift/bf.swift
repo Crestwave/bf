@@ -44,11 +44,11 @@ if stack.count > 0 {
 }
 
 let len = program.count
+var i = 0
 var line: String = ""
 var ptr = 0
 var tape = Array(repeating: 0, count: 30000)
 
-var i = 0
 while (i < len) {
     let c = program[program.index(program.startIndex, offsetBy: i)]
     if c == ">" {
