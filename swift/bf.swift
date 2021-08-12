@@ -1,8 +1,6 @@
 #!/usr/bin/env swift
 import Foundation
 
-let stderr = FileHandle.standardError
-
 var program = ""
 
 if CommandLine.argc > 1 {
@@ -10,7 +8,10 @@ if CommandLine.argc > 1 {
         program = try String(contentsOfFile: CommandLine.arguments[1])
     } catch let error as NSError {
         let msg = "\(CommandLine.arguments[1]): \(error.localizedDescription)\n"
-        stderr.write(msg.data(using: .utf8)!)
+
+        FileHandle.standardError
+                  .write(msg.data(using: .utf8)!)
+
         exit(1)
     }
 } else {
@@ -29,56 +30,50 @@ for (i, c) in program.enumerated() {
         stack.append(i)
     } else if c == "]" {
         if stack.count == 0 {
-            stderr.write("error: extraneous ']'\n".data(using: .utf8)!)
+            FileHandle.standardError
+                      .write("error: extraneous ']'\n".data(using: .utf8)!)
+
             exit(1)
         }
 
         let j = stack.removeLast()
+
         jumps[i] = j
         jumps[j] = i
     }
 }
 
 if stack.count > 0 {
-    stderr.write("error: expected ']'\n".data(using: .utf8)!)
+    FileHandle.standardError
+              .write("error: expected ']'\n".data(using: .utf8)!)
+
     exit(1)
 }
 
 let len = program.count
 
 var i = 0
-var line: String = ""
+var line = ""
 var ptr = 0
-var tape = Array(repeating: 0, count: 30000)
+var tape = Array(repeating: 0, count: 65536)
 
 while (i < len) {
     let c = program[program.index(program.startIndex, offsetBy: i)]
 
     if c == ">" {
-        ptr += 1
-        if ptr == 30000 {
-            ptr = 0
-        }
+        ptr = (ptr + 1) & 65535
     } else if c == "<" {
-        ptr -= 1
-        if ptr == -1 {
-            ptr = 29999
-        }
+        ptr = (ptr - 1) & 65535
     } else if c == "+" {
-        tape[ptr] += 1
-        if tape[ptr] == 256 {
-            tape[ptr] = 0
-        }
+        tape[ptr] = (tape[ptr] + 1) & 255
     } else if c == "-" {
-        tape[ptr] -= 1
-        if tape[ptr] == -1 {
-            tape[ptr] = 255
-        }
+        tape[ptr] = (tape[ptr] - 1) & 255
     } else if c == "." {
         print(Character(UnicodeScalar(tape[ptr])!), terminator: "")
     } else if c == "," {
         if line.count == 0 {
             let input = readLine(strippingNewline: false)
+
             if input != nil {
                 line = input!
             }
@@ -97,6 +92,7 @@ while (i < len) {
             i = jumps[i]
         }
     }
+
 
     i += 1
 }
