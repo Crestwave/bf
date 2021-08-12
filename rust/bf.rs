@@ -55,7 +55,7 @@ fn main() -> io::Result<()> {
             ',' => {
                 match io::stdin().bytes().next() {
                     Some(Ok(c)) => tape[j] = c,
-                    Some(Err(e)) => panic!(e),
+                    Some(Err(e)) => panic!("{}", e),
                     None => (),
                 }
             }
