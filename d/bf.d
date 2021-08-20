@@ -1,10 +1,21 @@
-void main(in string[] args)
-{
-    import std.array, std.file, std.regex, std.stdio;
+import std.array : back, empty, popBack;
+import std.file : FileException, read;
+import std.regex : regex, replaceAll;
+import std.stdio : EOF, getchar, putchar, stdin, stdout, writeln;
 
+int main(in string[] args)
+{
     char[] program;
     if (args.length > 1)
-        program = cast(char[]) read(args[1]);
+        try
+        {
+            program = cast(char[]) read(args[1]);
+        }
+        catch (FileException e)
+        {
+            writeln(e.msg);
+            return 1;
+        }
     else
         stdin.readf("%s", program);
 
@@ -75,4 +86,6 @@ void main(in string[] args)
             default:
                 break;
         }
+
+    return 0;
 }
