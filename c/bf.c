@@ -1,26 +1,25 @@
 #include <stdio.h>
 #include <stdint.h>
 
-#define MAX_CODE_SIZE 65536
-
-char program[MAX_CODE_SIZE];
+char program[65536];
 uint8_t tape[65536];
 uint16_t ptr;
-int jumps[MAX_CODE_SIZE];
-int stack[MAX_CODE_SIZE];
+int jumps[65536];
+int stack[65536];
 int len;
 int c;
 int i;
 
+
 int main(int argc, char **argv)
 {
-	if (argc < 2) {
-		len = fread(program, 1, MAX_CODE_SIZE, stdin);
-		clearerr(stdin);
-	} else {
+	if (argc > 1) {
 		FILE *f = fopen(argv[1], "r");
-		len = fread(program, 1, MAX_CODE_SIZE, f);
+		len = fread(program, 1, 65536, f);
 		fclose(f);
+	} else {
+		len = fread(program, 1, 65536, stdin);
+		clearerr(stdin);
 	}
 
 	for (i = 0; i < len; ++i)
