@@ -10,3 +10,7 @@ A brainfuck interpreter written in pure Elvish
 	- Negative pointers count from the back of the list
 - Unmatched brackets are detected before runtime
 - Output is UTF-8-encoded
+
+# bf2.elv Info
+
+- The program is transpiled into Elvish then evaluated
