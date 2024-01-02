@@ -8,7 +8,7 @@ if ($filename -ne $null) {
 } else {
 	do {
 		$line = [console]::ReadLine()
-		$program = $program + $line
+		$program += $line
 	} while ($line -ne $null)
 }
 
