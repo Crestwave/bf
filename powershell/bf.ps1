@@ -11,8 +11,8 @@ for ($i = 0; $i -lt $program.length; ++$i) {
 	switch ($program[$i]) {
 		"[" { $null = $stack.Add($i) }
 		"]" {
-			if ($stack.length -eq 0) {
-				Write-Host "UNEXPECTED ]"
+			if ($stack.count -eq 0) {
+				throw "Unexpected token ']'."
 			}
 
 			$j = $stack[-1]
@@ -24,7 +24,7 @@ for ($i = 0; $i -lt $program.length; ++$i) {
 }
 
 if ($stack.length -gt 0) {
-	Write-Host "UNMATCHED ["
+	throw "Unmatched token '['."
 }
 
 [console]::TreatControlCAsInput = $true
@@ -49,18 +49,14 @@ for ($i = 0; $i -lt $program.length; ++$i) {
 		"," {
 			if ([string]::IsNullOrEmpty($in)) {
 				while ($key = $Host.UI.RawUI.ReadKey()) {
-					# Backspace
 					if ($key.VirtualKeyCode -eq 8 -And $in.length -gt 1) {
 						Write-Host -NoNewline `r(" " * $in.length)
 						$in = $in.SubString(0, $in.length - 2)
 						Write-Host -NoNewline `r$in
-					# Ctrl-C
 					} elseif ($key.VirtualKeyCode -eq 67 -And $key.Character -ne "c") {
 						exit
-					# Ctrl-D
 					} elseif ($key.VirtualKeyCode -eq 68 -And $key.Character -ne "d") {
 						break
-					# Newline
 					} elseif ($key.VirtualKeyCode -eq 13) {
 						$in = $in + "`n"
 						break
