@@ -55,9 +55,7 @@ for ($i = 0; $i -lt $program.length; ++$i) {
 		"." { Write-Host -NoNewline ([char]$tape[$ptr]) }
 		"," {
 			$c = [console]::Read()
-			if ($c -eq 13) {
-				$tape[$ptr] = 10
-			} elseif ($c -ne -1) {
+			if ($c -ne -1) {
 				$tape[$ptr] = $c
 			}
 		}
