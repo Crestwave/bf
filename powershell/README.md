@@ -10,3 +10,7 @@ A brainfuck interpreter written in pure PowerShell
 	- Negative pointers count from the back of the array
 - Unmatched brackets are detected before runtime
 - Output is UTF-8-encoded
+
+## bf2.ps1 Info
+
+- The program is transpiled into PowerShell then evaluated
