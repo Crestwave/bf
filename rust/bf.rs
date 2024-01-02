@@ -27,7 +27,7 @@ fn main() -> io::Result<()> {
                 stack.push(i);
             } else if c == &']' {
                 if stack.is_empty() {
-                    panic!("un-closed '['");
+                    panic!("unexpected ']'");
                 }
 
                 let j = stack.pop().unwrap();
@@ -37,7 +37,7 @@ fn main() -> io::Result<()> {
         }
 
         if !stack.is_empty() {
-            panic!("unexpected ']'");
+            panic!("un-closed '['");
         }
         builder
     };
