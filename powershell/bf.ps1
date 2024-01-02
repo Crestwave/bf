@@ -1,9 +1,17 @@
 #!/usr/bin/env pwsh
 param (
-	[string]$filename = $(Read-Host)
+	$filename
 )
 
-$program = Get-Content -Raw $filename
+if ($filename -ne $null) {
+	$program = Get-Content -Raw $filename
+} else {
+	do {
+		$line = [console]::ReadLine()
+		$program = $program + $line
+	} while ($line -ne $null)
+}
+
 $jumps = @{}
 $stack = [System.Collections.ArrayList]@()
 
@@ -27,7 +35,6 @@ if ($stack.length -gt 0) {
 	throw "Unmatched token '['."
 }
 
-[console]::TreatControlCAsInput = $true
 $tape = @(0) * 30000
 $ptr = 0
 
@@ -47,32 +54,11 @@ for ($i = 0; $i -lt $program.length; ++$i) {
 		}
 		"." { Write-Host -NoNewline ([char]$tape[$ptr]) }
 		"," {
-			if ([string]::IsNullOrEmpty($in)) {
-				while ($key = $Host.UI.RawUI.ReadKey()) {
-					if ($key.VirtualKeyCode -eq 8 -And $in.length -gt 1) {
-						Write-Host -NoNewline `r(" " * $in.length)
-						$in = $in.SubString(0, $in.length - 2)
-						Write-Host -NoNewline `r$in
-					} elseif ($key.VirtualKeyCode -eq 67 -And $key.Character -ne "c") {
-						exit
-					} elseif ($key.VirtualKeyCode -eq 68 -And $key.Character -ne "d") {
-						break
-					} elseif ($key.VirtualKeyCode -eq 13) {
-						$in = $in + "`n"
-						break
-					}
-
-					$in = $in + [string]$key.Character
-				}
-
-				if (! [string]::IsNullOrEmpty($in)) {
-					Write-Host
-				}
-			}
-
-			if (! [string]::IsNullOrEmpty($in)) {
-				$tape[$ptr] = [byte][char]$in[0]
-				$in = $in.Substring(1)
+			$c = [console]::Read()
+			if ($c -eq 13) {
+				$tape[$ptr] = 10
+			} elseif ($c -ne -1) {
+				$tape[$ptr] = $c
 			}
 		}
 		"[" {
